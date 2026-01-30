@@ -12,7 +12,8 @@
     "jsr:@std/path@^1.1.4": "1.1.4",
     "jsr:@std/testing@1": "1.0.17",
     "npm:@google/genai@^1.38.0": "1.38.0",
-    "npm:ink@^6.6.0": "6.6.0_react@19.2.4",
+    "npm:@types/react@^19.2.10": "19.2.10",
+    "npm:ink@^6.6.0": "6.6.0_@types+react@19.2.10_react@19.2.4",
     "npm:react@^19.2.4": "19.2.4",
     "npm:zod@^4.3.6": "4.3.6"
   },
@@ -129,6 +130,12 @@
         "undici-types"
       ]
     },
+    "@types/react@19.2.10": {
+      "integrity": "sha512-WPigyYuGhgZ/cTPRXB2EwUw+XvsRA3GqHlsP4qteqrnnjDrApbS7MxcGr/hke5iUoeB7E/gQtrs9I37zAJ0Vjw==",
+      "dependencies": [
+        "csstype"
+      ]
+    },
     "agent-base@7.1.4": {
       "integrity": "sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ=="
     },
@@ -218,6 +225,9 @@
         "shebang-command",
         "which"
       ]
+    },
+    "csstype@3.2.3": {
+      "integrity": "sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ=="
     },
     "data-uri-to-buffer@4.0.1": {
       "integrity": "sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A=="
@@ -342,10 +352,11 @@
     "indent-string@5.0.0": {
       "integrity": "sha512-m6FAo/spmsW2Ab2fU35JTYwtOKa2yAwXSwgjSv1TJzh4Mh7mC3lzAOVLBprb72XsTrgkEIsl7YrFNAiDiRhIGg=="
     },
-    "ink@6.6.0_react@19.2.4": {
+    "ink@6.6.0_@types+react@19.2.10_react@19.2.4": {
       "integrity": "sha512-QDt6FgJxgmSxAelcOvOHUvFxbIUjVpCH5bx+Slvc5m7IEcpGt3dYwbz/L+oRnqEGeRvwy1tineKK4ect3nW1vQ==",
       "dependencies": [
         "@alcalzone/ansi-tokenize",
+        "@types/react",
         "ansi-escapes",
         "ansi-styles@6.2.3",
         "auto-bind",
@@ -369,6 +380,9 @@
         "wrap-ansi@9.0.2",
         "ws",
         "yoga-layout"
+      ],
+      "optionalPeers": [
+        "@types/react"
       ]
     },
     "is-fullwidth-code-point@3.0.0": {
@@ -654,6 +668,7 @@
       "jsr:@std/dotenv@~0.225.6",
       "jsr:@std/testing@1",
       "npm:@google/genai@^1.38.0",
+      "npm:@types/react@^19.2.10",
       "npm:ink@^6.6.0",
       "npm:react@^19.2.4",
       "npm:zod@^4.3.6"

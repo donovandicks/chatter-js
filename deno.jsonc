@@ -28,7 +28,7 @@
     },
     "build": {
       "description": "Compile the application.",
-      "command": "deno compile -A -o ./chatter-js src/main.ts",
+      "command": "deno compile -A -o ./chatter-js src/main.tsx",
       "dependencies": [
         "prebuild"
       ]
@@ -42,6 +42,7 @@
     "@std/testing": "jsr:@std/testing@^1",
     "ink": "npm:ink@^6.6.0",
     "react": "npm:react@^19.2.4",
+    "@types/react": "npm:@types/react@^19.2.10",
     "zod": "npm:zod@^4.3.6"
   },
   "fmt": {
