@@ -16,6 +16,12 @@ An interactive TUI for an AI coding agent. Built using Deno & TypeScript.
 - Run `deno add --npm <package>` to add a dependency from NPM.
 - Run `deno add --jsr <package>` to add a dependency from JSR.
 
+Key dependencies:
+
+- `@google/genai`: Google's Gen AI Library for the Gemini API.
+  - Refer to the docs when needed: <https://ai.google.dev/gemini-api/docs/libraries#javascript>
+- `zod`: Runtime type validation.
+
 ## Build & Test
 
 Run `deno task` to list all available tasks.
