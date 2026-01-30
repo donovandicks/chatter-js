@@ -1,1 +1,0 @@
-if (import.meta.main) {}

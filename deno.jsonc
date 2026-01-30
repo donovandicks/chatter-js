@@ -15,6 +15,10 @@
         "fmt::check"
       ]
     },
+    "test::unit": {
+      "description": "Run unit tests.",
+      "command": "deno test --no-check -A ./tests/unit/"
+    },
     "prebuild": {
       "description": "Run format, lint, and type checks.",
       "command": "deno check",
@@ -24,7 +28,7 @@
     },
     "build": {
       "description": "Compile the application.",
-      "command": "deno compile -A main.ts",
+      "command": "deno compile -A -o ./chatter-js src/main.ts",
       "dependencies": [
         "prebuild"
       ]

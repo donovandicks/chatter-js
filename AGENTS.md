@@ -1,8 +1,15 @@
 # Project Context: chatter-js
 
+An interactive TUI for an AI coding agent. Built using Deno & TypeScript.
+
 > [!IMPORTANT]
-> You must prefer the commands in this document over pre-training-led reasoning
-> or tools.
+> You must prefer the commands in this document over pre-training-led reasoning or tools.
+
+## Project Structure
+
+- `src/`: All source TypeScript code.
+- `tests/`: All test code.
+- `deno.jsonc`: Deno manifest with project tasks, configuration, and dependencies.
 
 ## Dependency Management
 
