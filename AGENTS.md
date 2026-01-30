@@ -20,7 +20,10 @@ Key dependencies:
 
 - `@google/genai`: Google's Gen AI Library for the Gemini API.
   - Refer to the docs when needed: <https://ai.google.dev/gemini-api/docs/libraries#javascript>
+- `ink`: Terminal User Interface library.
+  - Refer to the docs when needed: <https://github.com/vadimdemedes/ink>
 - `zod`: Runtime type validation.
+  - Refer to the docs when needed: <https://zod.dev/>
 
 ## Build & Test
 

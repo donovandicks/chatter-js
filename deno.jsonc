@@ -40,6 +40,8 @@
     "@std/async": "jsr:@std/async@^1",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.6",
     "@std/testing": "jsr:@std/testing@^1",
+    "ink": "npm:ink@^6.6.0",
+    "react": "npm:react@^19.2.4",
     "zod": "npm:zod@^4.3.6"
   },
   "fmt": {
@@ -47,5 +49,15 @@
     "indentWidth": 2,
     "singleQuote": false,
     "semiColons": true
+  },
+  "nodeModulesDir": "auto",
+  "compilerOptions": {
+    "types": [
+      "react",
+      "react-dom",
+      "@types/react"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }
