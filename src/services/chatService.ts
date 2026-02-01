@@ -2,11 +2,8 @@ import { Message } from "../types/chat.ts";
 import { geminiAgent } from "./gemini.ts";
 
 export class ChatService {
-  async sendMessage(
-    content: string,
-    history: Message[],
-  ): Promise<Message> {
-    const responseText = await geminiAgent.generateResponse(history, content);
+  async sendMessage(content: string): Promise<Message> {
+    const responseText = await geminiAgent.generateResponse(content);
 
     return {
       id: (Date.now() + 1).toString(),

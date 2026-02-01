@@ -35,7 +35,7 @@ export const Chat = () => {
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
 
-    const systemMsg = await chatService.sendMessage(value, messages);
+    const systemMsg = await chatService.sendMessage(value);
     setMessages((prev) => [...prev, systemMsg]);
   };
 
