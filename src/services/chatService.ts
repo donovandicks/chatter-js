@@ -1,12 +1,14 @@
 import { Message } from "../types/chat.ts";
 import { geminiAgent } from "./gemini.ts";
 
+const messageId = () => Temporal.Now.instant().epochMilliseconds;
+
 export class ChatService {
   async sendMessage(content: string): Promise<Message> {
     const responseText = await geminiAgent.generateResponse(content);
 
     return {
-      id: (Date.now() + 1).toString(),
+      id: messageId(),
       content: responseText,
       sender: "system",
     };
@@ -14,7 +16,7 @@ export class ChatService {
 
   createUserMessage(content: string): Message {
     return {
-      id: Date.now().toString(),
+      id: messageId(),
       content,
       sender: "user",
     };

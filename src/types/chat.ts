@@ -1,7 +1,7 @@
 export type Sender = "user" | "system";
 
 export interface Message {
-  id: string;
+  id: number;
   content: string;
   sender: Sender;
 }
