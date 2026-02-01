@@ -3,6 +3,7 @@
   "specifiers": {
     "jsr:@std/assert@^1.0.17": "1.0.18",
     "jsr:@std/assert@^1.0.18": "1.0.18",
+    "jsr:@std/async@^1.1.0": "1.1.1",
     "jsr:@std/async@^1.1.1": "1.1.1",
     "jsr:@std/data-structures@^1.0.10": "1.0.10",
     "jsr:@std/dotenv@~0.225.6": "0.225.6",
@@ -12,6 +13,7 @@
     "jsr:@std/testing@^1.0.17": "1.0.17",
     "npm:@google/genai@^1.39.0": "1.39.0",
     "npm:@types/react@^19.2.10": "19.2.10",
+    "npm:ink-text-input@6": "6.0.0_ink@6.6.0__@types+react@19.2.10__react@19.2.4_react@19.2.4_@types+react@19.2.10",
     "npm:ink@^6.6.0": "6.6.0_@types+react@19.2.10_react@19.2.4",
     "npm:react@^19.2.4": "19.2.4",
     "npm:zod@^4.3.6": "4.3.6"
@@ -51,6 +53,7 @@
       "integrity": "87bdc2700fa98249d48a17cd72413352d3d3680dcfbdb64947fd0982d6bbf681",
       "dependencies": [
         "jsr:@std/assert@^1.0.17",
+        "jsr:@std/async@^1.1.0",
         "jsr:@std/data-structures",
         "jsr:@std/fs",
         "jsr:@std/internal",
@@ -349,6 +352,15 @@
     },
     "indent-string@5.0.0": {
       "integrity": "sha512-m6FAo/spmsW2Ab2fU35JTYwtOKa2yAwXSwgjSv1TJzh4Mh7mC3lzAOVLBprb72XsTrgkEIsl7YrFNAiDiRhIGg=="
+    },
+    "ink-text-input@6.0.0_ink@6.6.0__@types+react@19.2.10__react@19.2.4_react@19.2.4_@types+react@19.2.10": {
+      "integrity": "sha512-Fw64n7Yha5deb1rHY137zHTAbSTNelUKuB5Kkk2HACXEtwIHBCf9OH2tP/LQ9fRYTl1F0dZgbW0zPnZk6FA9Lw==",
+      "dependencies": [
+        "chalk",
+        "ink",
+        "react",
+        "type-fest"
+      ]
     },
     "ink@6.6.0_@types+react@19.2.10_react@19.2.4": {
       "integrity": "sha512-QDt6FgJxgmSxAelcOvOHUvFxbIUjVpCH5bx+Slvc5m7IEcpGt3dYwbz/L+oRnqEGeRvwy1tineKK4ect3nW1vQ==",
@@ -667,6 +679,7 @@
       "jsr:@std/testing@^1.0.17",
       "npm:@google/genai@^1.39.0",
       "npm:@types/react@^19.2.10",
+      "npm:ink-text-input@6",
       "npm:ink@^6.6.0",
       "npm:react@^19.2.4",
       "npm:zod@^4.3.6"

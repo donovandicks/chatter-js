@@ -41,6 +41,7 @@
     "@std/dotenv": "jsr:@std/dotenv@^0.225.6",
     "@std/testing": "jsr:@std/testing@^1.0.17",
     "ink": "npm:ink@^6.6.0",
+    "ink-text-input": "npm:ink-text-input@^6.0.0",
     "react": "npm:react@^19.2.4",
     "@types/react": "npm:@types/react@^19.2.10",
     "zod": "npm:zod@^4.3.6"
