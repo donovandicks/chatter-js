@@ -20,6 +20,7 @@ Key dependencies:
 
 - `@google/genai`: Google's Gen AI Library for the Gemini API.
   - Refer to the docs when needed: <https://ai.google.dev/gemini-api/docs/libraries#javascript>
+  - `gemini-3-pro-preview` and `gemini-3-flash-preview` are the latest, valid models.
 - `ink`: Terminal User Interface library.
   - Refer to the docs when needed: <https://github.com/vadimdemedes/ink>
 - `zod`: Runtime type validation.
@@ -34,4 +35,6 @@ Run with `deno task <command>`:
 - `fmt`: Automatically apply formatting rules.
 - `lint`: Check formatting and lint rules.
 - `prebuild`: Perform linting and type checking.
-- `build`: Compile the application to an executable `chatter-js`.
+- `build`: Execute `prebuild` and compile the application to an executable `chatter-js`.
+- `build::quick`: Compile the application without any prechecks.
+- `clean`: Remove all compiled binaries and generated files.
