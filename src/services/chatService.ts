@@ -1,16 +1,16 @@
 import { Message } from "../types/chat.ts";
+import { geminiAgent } from "./gemini.ts";
 
 export class ChatService {
   async sendMessage(
     content: string,
-    _history: Message[],
+    history: Message[],
   ): Promise<Message> {
-    // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    const responseText = await geminiAgent.generateResponse(history, content);
 
     return {
       id: (Date.now() + 1).toString(),
-      content: `You said: "${content}"`,
+      content: responseText,
       sender: "system",
     };
   }
