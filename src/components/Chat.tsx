@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box, Text, useStdout } from "ink";
 import TextInput from "ink-text-input";
+import Spinner from "ink-spinner";
 import { Message } from "../types/chat.ts";
 import { chatService } from "../services/chatService.ts";
 import { MessageList } from "./MessageList.tsx";
@@ -8,6 +9,7 @@ import { MessageList } from "./MessageList.tsx";
 export const Chat = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { stdout } = useStdout();
   const [dimensions, setDimensions] = useState({
     columns: stdout?.columns || 80,
@@ -34,9 +36,14 @@ export const Chat = () => {
     const userMsg = chatService.createUserMessage(value);
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
+    setIsLoading(true);
 
-    const systemMsg = await chatService.sendMessage(value);
-    setMessages((prev) => [...prev, systemMsg]);
+    try {
+      const systemMsg = await chatService.sendMessage(value);
+      setMessages((prev) => [...prev, systemMsg]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -46,6 +53,17 @@ export const Chat = () => {
       height={dimensions.rows}
     >
       <MessageList messages={messages} />
+
+      {isLoading && (
+        <Box paddingLeft={1}>
+          <Box marginRight={1}>
+            <Text color="blue">System:</Text>
+          </Box>
+          <Text color="gray">
+            <Spinner type="dots" />
+          </Text>
+        </Box>
+      )}
 
       <Box
         borderStyle="single"
