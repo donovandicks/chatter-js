@@ -14,6 +14,7 @@
     "jsr:@std/path@^1.1.4": "1.1.4",
     "jsr:@std/testing@^1.0.17": "1.0.17",
     "npm:@google/genai@^1.39.0": "1.39.0",
+    "npm:@opentelemetry/api@^1.9.0": "1.9.0",
     "npm:@types/react@^19.2.10": "19.2.10",
     "npm:ink-spinner@5": "5.0.0_ink@6.6.0__@types+react@19.2.10__react@19.2.4_react@19.2.4_@types+react@19.2.10",
     "npm:ink-text-input@6": "6.0.0_ink@6.6.0__@types+react@19.2.10__react@19.2.4_react@19.2.4_@types+react@19.2.10",
@@ -96,6 +97,9 @@
         "wrap-ansi@8.1.0",
         "wrap-ansi-cjs@npm:wrap-ansi@7.0.0"
       ]
+    },
+    "@opentelemetry/api@1.9.0": {
+      "integrity": "sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg=="
     },
     "@pkgjs/parseargs@0.11.0": {
       "integrity": "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="
@@ -700,6 +704,7 @@
       "jsr:@std/fmt@^1.0.9",
       "jsr:@std/testing@^1.0.17",
       "npm:@google/genai@^1.39.0",
+      "npm:@opentelemetry/api@^1.9.0",
       "npm:@types/react@^19.2.10",
       "npm:ink-spinner@5",
       "npm:ink-text-input@6",

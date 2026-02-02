@@ -1,5 +1,8 @@
 {
   "tasks": {
+    "dev": {
+      "command": "OTEL_DENO=true deno run -A ./src/main.tsx"
+    },
     "fmt": {
       "description": "Apply formatting rules.",
       "command": "deno fmt"
@@ -44,6 +47,7 @@
   },
   "imports": {
     "@google/genai": "npm:@google/genai@^1.39.0",
+    "@opentelemetry/api": "npm:@opentelemetry/api@^1.9.0",
     "@std/assert": "jsr:@std/assert@^1.0.18",
     "@std/async": "jsr:@std/async@^1.1.1",
     "@std/datetime": "jsr:@std/datetime@^0.225.7",
@@ -75,5 +79,8 @@
     ],
     "jsx": "react-jsx",
     "jsxImportSource": "react"
-  }
+  },
+  "exclude": [
+    "lgtm/"
+  ]
 }
