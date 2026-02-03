@@ -1,5 +1,6 @@
 .agent/
 .scratch/
+scratch*
 lgtm/
 chatter-js
 node_modules
