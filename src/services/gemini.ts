@@ -12,6 +12,8 @@ import { ToolSchema } from "../types/tool.ts";
 import { ToolRegistry } from "../tools/registry.ts";
 import { tracer } from "../o11y/tracing.ts";
 import { SpanStatusCode } from "@opentelemetry/api";
+import { EventPayload, EventType } from "../types/event.ts";
+import { ChatOptions } from "../types/chat.ts";
 
 const Models = {
   Gemini3Pro: "gemini-3-pro-preview",
@@ -38,8 +40,10 @@ export class GeminiAgent {
     // { googleSearch: {} },
     // { urlContext: {} },
   ];
+  private onEvent: (event: EventPayload) => void;
 
-  constructor(tools?: ToolSchema[]) {
+  constructor({ tools, onEvent }: ChatOptions) {
+    this.onEvent = onEvent;
     const apiKey = Deno.env.get("GEMINI_API_KEY");
     if (!apiKey) {
       throw new Error("GEMINI_API_KEY is not set in the environment variables.");
@@ -97,7 +101,18 @@ export class GeminiAgent {
           return `Error: tool ${name} not found`;
         }
 
+        this.onEvent({
+          type: EventType.ToolCall,
+          displayText: `Calling tool: ${name} with args: ${JSON.stringify(args)}`,
+        });
+
         const toolResponse = await tool.function(args!);
+
+        this.onEvent({
+          type: EventType.ToolResponse,
+          displayText: `Tool response: ${toolResponse.slice(0, 100)}${toolResponse.length > 100 ? "..." : ""}`,
+        });
+
         span.setAttribute("tool.response", toolResponse);
         return toolResponse;
       } catch (error) {
@@ -116,6 +131,11 @@ export class GeminiAgent {
   async agentLoop(prompt: string): Promise<string> {
     let message: PartListUnion = prompt;
 
+    this.onEvent({
+      type: EventType.ChatMessage,
+      displayText: prompt,
+    });
+
     while (true) {
       const response = await this.sendMessage(message);
 
@@ -130,6 +150,10 @@ export class GeminiAgent {
         };
         continue;
       } else if (response.text) {
+        this.onEvent({
+          type: EventType.ChatResponse,
+          displayText: response.text,
+        });
         return response.text;
       } else {
         return "Error: failed to get text response.";
@@ -154,5 +178,3 @@ export class GeminiAgent {
     });
   }
 }
-
-export const geminiAgent = new GeminiAgent(Object.values(ToolRegistry));

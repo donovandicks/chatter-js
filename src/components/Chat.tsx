@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Box, Text, useStdout } from "ink";
 import TextInput from "ink-text-input";
 import { Message } from "../types/chat.ts";
-import { chatService } from "../services/chatService.ts";
+import { ChatService } from "../services/chatService.ts";
+import { EventType } from "../types/event.ts";
 import { MessageList } from "./MessageList.tsx";
 import { LoadingIndicator } from "./LoadingIndicator.tsx";
 
@@ -15,6 +16,24 @@ export const Chat = () => {
     columns: stdout?.columns || 80,
     rows: stdout?.rows || 24,
   });
+
+  const chatService = useMemo(() => {
+    return new ChatService({
+      onEvent: (event) => {
+        if (event.type === EventType.ToolCall || event.type === EventType.ToolResponse) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: Date.now(),
+              content: event.displayText || "",
+              sender: "system",
+              variant: "tool",
+            },
+          ]);
+        }
+      },
+    });
+  }, []);
 
   useEffect(() => {
     const onResize = () => {
@@ -51,17 +70,24 @@ export const Chat = () => {
       flexDirection="column"
       width={dimensions.columns}
       height={dimensions.rows}
+      paddingX={1}
+      paddingY={1}
     >
-      <MessageList messages={messages} />
-
-      {isLoading && <LoadingIndicator />}
+      <Box flexDirection="column" flexGrow={1} overflowY="hidden">
+        <MessageList messages={messages} />
+        {isLoading && (
+          <Box marginTop={1}>
+            <LoadingIndicator />
+          </Box>
+        )}
+      </Box>
 
       <Box
         borderStyle="single"
         borderColor="gray"
-        paddingLeft={1}
-        paddingRight={1}
+        paddingX={1}
         flexShrink={0}
+        marginTop={1}
       >
         <Box marginRight={1}>
           <Text color="green">{">"}</Text>
