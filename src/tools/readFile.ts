@@ -1,5 +1,6 @@
 import z from "zod";
 import { ToolSchema } from "../types/tool.ts";
+import { existsSync } from "@std/fs";
 
 const readFileParams = z.object({
   path: z.string().describe("The relative path of a file in the working directory."),
@@ -16,7 +17,11 @@ export const ReadFileTool = {
 
 export function readFile({ path }: ReadFileParams): string {
   if (!path) {
-    return "Error: 'path' must be defined'";
+    return "Error: 'path' must be defined.";
+  }
+
+  if (!existsSync(path)) {
+    return `Error: ${path} does not exist.`;
   }
 
   try {

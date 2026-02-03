@@ -47,6 +47,7 @@
     "@std/fs@1.0.22": {
       "integrity": "de0f277a58a867147a8a01bc1b181d0dfa80bfddba8c9cf2bacd6747bcec9308",
       "dependencies": [
+        "jsr:@std/internal",
         "jsr:@std/path"
       ]
     },
@@ -702,6 +703,7 @@
       "jsr:@std/datetime@~0.225.7",
       "jsr:@std/dotenv@~0.225.6",
       "jsr:@std/fmt@^1.0.9",
+      "jsr:@std/fs@^1.0.22",
       "jsr:@std/testing@^1.0.17",
       "npm:@google/genai@^1.39.0",
       "npm:@opentelemetry/api@^1.9.0",
