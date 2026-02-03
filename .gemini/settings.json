@@ -1,0 +1,42 @@
+{
+  "context": {
+    "fileName": [
+      "AGENTS.md",
+      "GEMINI.md",
+      "CONSTITUTION.md"
+    ]
+  },
+  "general": {
+    "previewFeatures": true
+  },
+  "tools": {
+    "useRipgrep": true
+  },
+  "experimental": {
+    "plan": true
+  },
+  "mcpServers": {},
+  "privacy": {
+    "usageStatisticsEnabled": false
+  },
+  "security": {
+    "auth": {
+      "selectedType": "gemini-api-key"
+    }
+  },
+  "telemetry": {
+    "enabled": false
+  },
+  "ui": {
+    "dynamicWindowTitle": true,
+    "showCitations": true,
+    "showMemoryUsage": true,
+    "showModelInfoInChat": true,
+    "footer": {
+      "hideContextPercentage": false,
+      "hideCWD": false,
+      "hideModelInfo": false,
+      "hideSandboxStatus": false
+    }
+  }
+}
