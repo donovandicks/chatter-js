@@ -63,7 +63,16 @@ export class GeminiAgent {
     return await tracer.startActiveSpan("chat", async (span) => {
       try {
         span.setAttribute("message", typeof message !== "string" ? JSON.stringify(message) : message);
-        return await this.chat.sendMessage({ message });
+        const response = await this.chat.sendMessage({ message });
+        span.setAttribute(
+          "response",
+          JSON.stringify({
+            text: response.text,
+            functionCalls: response.functionCalls,
+            usage: response.usageMetadata,
+          }),
+        );
+        return response;
       } catch (error) {
         span.recordException(error as Error);
         span.setStatus({
@@ -77,39 +86,70 @@ export class GeminiAgent {
     });
   }
 
-  async generateResponse(newMessage: string): Promise<string> {
-    try {
-      let response = await this.sendMessage(newMessage);
+  async executeTool({ name, args }: FunctionCall): Promise<string> {
+    return await tracer.startActiveSpan("tool", async (span) => {
+      try {
+        span.setAttribute("tool.name", name!);
+        span.setAttribute("tool.args", JSON.stringify(args));
+
+        const tool = ToolRegistry[name! as keyof typeof ToolRegistry];
+        if (!tool) {
+          return `Error: tool ${name} not found`;
+        }
+
+        return await tool.function(args!);
+      } catch (error) {
+        span.recordException(error as Error);
+        span.setStatus({
+          code: SpanStatusCode.ERROR,
+          message: (error as Error).message,
+        });
+        throw error;
+      } finally {
+        span.end();
+      }
+    });
+  }
+
+  async agentLoop(prompt: string): Promise<string> {
+    let message: PartListUnion = prompt;
+
+    while (true) {
+      const response = await this.sendMessage(message);
 
       if (response.functionCalls && response.functionCalls.length > 0) {
         const fc = response.functionCalls[0];
         const result = await this.executeTool(fc);
-        response = await this.sendMessage({
+        message = {
           functionResponse: {
             name: fc.name,
             response: { result },
           },
-        });
-      }
-
-      if (response.text) {
+        };
+        continue;
+      } else if (response.text) {
         return response.text;
+      } else {
+        return "Error: failed to get text response.";
       }
-
-      return "Error: No text in response.";
-    } catch (error) {
-      console.error("Error calling Gemini API:", error);
-      return "Error: Unable to reach the AI agent. Please check your API key and internet connection.";
     }
   }
 
-  async executeTool({ name, args }: FunctionCall) {
-    const tool = ToolRegistry[name! as keyof typeof ToolRegistry];
-    if (!tool) {
-      return `Error: tool ${name} not found`;
-    }
-
-    return await tool.function(args!);
+  async run(prompt: string): Promise<string> {
+    return await tracer.startActiveSpan("run", async (span) => {
+      try {
+        return await this.agentLoop(prompt);
+      } catch (error) {
+        span.recordException(error as Error);
+        span.setStatus({
+          code: SpanStatusCode.ERROR,
+          message: (error as Error).message,
+        });
+        return "Error: failed to reach the AI agent. Please check your API Key and internet connection.";
+      } finally {
+        span.end();
+      }
+    });
   }
 }
 

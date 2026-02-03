@@ -5,7 +5,7 @@ const messageId = () => Temporal.Now.instant().epochMilliseconds;
 
 export class ChatService {
   async sendMessage(content: string): Promise<Message> {
-    const responseText = await geminiAgent.generateResponse(content);
+    const responseText = await geminiAgent.run(content);
 
     return {
       id: messageId(),
