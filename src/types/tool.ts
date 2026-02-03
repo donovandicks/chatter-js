@@ -6,7 +6,7 @@ export const toolSchema = z.object({
   inputSchema: z.record(z.string(), z.any()),
   function: z.function({
     input: [z.any()],
-    output: z.string(),
+    output: z.string().or(z.promise(z.string())),
   }),
 });
 export type ToolSchema = z.infer<typeof toolSchema>;

@@ -62,10 +62,10 @@ export class GeminiAgent {
   async sendMessage(message: PartListUnion): Promise<GenerateContentResponse> {
     return await tracer.startActiveSpan("chat", async (span) => {
       try {
-        span.setAttribute("message", typeof message !== "string" ? JSON.stringify(message) : message);
+        span.setAttribute("chat.message", typeof message !== "string" ? JSON.stringify(message) : message);
         const response = await this.chat.sendMessage({ message });
         span.setAttribute(
-          "response",
+          "chat.response",
           JSON.stringify({
             text: response.text,
             functionCalls: response.functionCalls,
@@ -97,7 +97,9 @@ export class GeminiAgent {
           return `Error: tool ${name} not found`;
         }
 
-        return await tool.function(args!);
+        const toolResponse = await tool.function(args!);
+        span.setAttribute("tool.response", toolResponse);
+        return toolResponse;
       } catch (error) {
         span.recordException(error as Error);
         span.setStatus({
@@ -153,4 +155,4 @@ export class GeminiAgent {
   }
 }
 
-export const geminiAgent = new GeminiAgent([ToolRegistry.read_file]);
+export const geminiAgent = new GeminiAgent(Object.values(ToolRegistry));
