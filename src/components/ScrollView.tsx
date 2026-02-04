@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Box, useInput } from "ink";
-import { ScrollView as ScrollViewImpl } from "ink-scroll-view";
+import { ScrollView as ScrollViewImpl, ScrollViewRef } from "ink-scroll-view";
 
 interface ScrollViewProps {
   height: number;
@@ -8,8 +8,7 @@ interface ScrollViewProps {
 }
 
 export const ScrollView: React.FC<ScrollViewProps> = ({ height, children }) => {
-  // deno-lint-ignore no-explicit-any
-  const scrollRef = useRef<any>(null);
+  const scrollRef = useRef<ScrollViewRef>(null);
 
   useEffect(() => {
     // Auto-scroll to bottom when new content arrives
