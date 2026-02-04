@@ -20,7 +20,7 @@
     },
     "test::unit": {
       "description": "Run unit tests.",
-      "command": "deno test --no-check -A ./tests/unit/"
+      "command": "deno test --no-check --allow-read ./tests/unit/"
     },
     "prebuild": {
       "description": "Run format, lint, and type checks.",
