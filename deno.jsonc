@@ -43,6 +43,14 @@
     "clean": {
       "description": "Remove all compiled binaries and generated files.",
       "command": "rm ./chatter-js"
+    },
+    "lgtm:start": {
+      "description": "Start the observability container.",
+      "command": "docker compose up -d"
+    },
+    "lgtm:stop": {
+      "description": "Stop the observability container.",
+      "command": "docker compose down --remove-orphans"
     }
   },
   "imports": {
