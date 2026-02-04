@@ -142,15 +142,16 @@ export class GeminiAgent {
     let turnCount = -1;
     while (true) {
       turnCount++;
+      const isLastTurn = turnCount >= MaxTurns;
 
-      if (turnCount > MaxTurns) {
+      if (isLastTurn) {
         message = [message, "This is the last turn. You **must** return a text response now."];
       }
 
       span!.addEvent("turnStarted", { "event.attributes.turnCount": turnCount });
       const response = await this.sendMessage(message);
 
-      if (response.functionCalls && response.functionCalls.length > 0) {
+      if (!isLastTurn && response.functionCalls && response.functionCalls.length > 0) {
         const fc = response.functionCalls[0];
         const result = await this.executeTool(fc);
         message = {
