@@ -9,7 +9,7 @@ type ReadFileParams = z.infer<typeof readFileParams>;
 
 export const ReadFileTool = {
   name: "read_file",
-  desc:
+  description:
     "Read the contents of a given relative file path. Use this when you want to see what's inside a file. Cannot be used with directory names.",
   inputSchema: z.toJSONSchema(readFileParams),
   function: readFile,

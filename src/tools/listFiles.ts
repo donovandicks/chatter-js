@@ -10,7 +10,7 @@ type ListFilesParams = z.infer<typeof listFilesParams>;
 
 export const ListFilesTool = {
   name: "list_files",
-  desc:
+  description:
     "List the files in a given relative directory path. Use this when you want to see what's inside a directory. Cannot be used with file names.",
   inputSchema: z.toJSONSchema(listFilesParams),
   function: listFiles,

@@ -11,7 +11,7 @@ type EditFileParams = z.infer<typeof editFileParams>;
 
 export const EditFileTool = {
   name: "edit_file",
-  desc: `Make edits to a file.
+  description: `Make edits to a file.
 Replaces "prev" with "edit". "prev" and "edit" MUST be different.
 If the file does not exist, it will be created.
 `,

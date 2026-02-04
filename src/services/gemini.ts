@@ -25,7 +25,7 @@ function toolSchemaToGeminiTool(ts: ToolSchema): ToolUnion {
     functionDeclarations: [
       {
         name: ts.name,
-        description: ts.desc,
+        description: ts.description,
         parametersJsonSchema: ts.inputSchema,
       },
     ],
