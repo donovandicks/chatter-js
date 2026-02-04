@@ -86,13 +86,13 @@ export const Chat = ({ settings }: { settings: ChatterSettings }) => {
     >
       <ScrollView height={viewHeight}>
         <MessageList messages={messages} />
-        {isLoading && (
-          <Box marginTop={1}>
-            <LoadingIndicator />
-          </Box>
-        )}
       </ScrollView>
 
+      {isLoading && (
+        <Box marginTop={1}>
+          <LoadingIndicator />
+        </Box>
+      )}
       <Box
         borderStyle="single"
         borderColor="gray"
