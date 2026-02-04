@@ -8,6 +8,13 @@ An interactive TUI for an AI coding agent. Built using Deno & TypeScript.
 ## Project Structure
 
 - `src/`: All source TypeScript code.
+  - `main.tsx`: The main entrypoint of Chatter.
+  - `components/`: UI components using the `ink` library.
+  - `config/`: Utilities to set and load the Chatter configuration.
+  - `o11y/`: Observability tools.
+  - `services/`: The core "business logic" of Chatter.
+  - `tools/`: Custom LLM Tool definitions.
+  - `types/`: General collection of reusable types.
 - `tests/`: All test code.
 - `deno.jsonc`: Deno manifest with project tasks, configuration, and dependencies.
 
