@@ -15,6 +15,7 @@ import { SpanStatusCode } from "@opentelemetry/api";
 import { EventPayload, EventType } from "../types/event.ts";
 import { ChatOptions } from "../types/chat.ts";
 import { GeminiAPIKey } from "../config/ai.ts";
+import { SystemPrompt } from "../config/systemPrompt.ts";
 
 const Models = {
   Gemini3Pro: "gemini-3-pro-preview",
@@ -58,6 +59,7 @@ export class GeminiAgent {
       model: Models.Gemini3Flash,
       history: this.history,
       config: {
+        systemInstruction: SystemPrompt,
         tools: this.tools,
       },
     });
