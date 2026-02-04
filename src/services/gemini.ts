@@ -11,10 +11,10 @@ import {
 import { ToolSchema } from "../types/tool.ts";
 import { ToolRegistry } from "../tools/registry.ts";
 import { tracer } from "../o11y/tracing.ts";
-import { SpanStatusCode } from "@opentelemetry/api";
+import { SpanStatusCode, trace } from "@opentelemetry/api";
 import { EventPayload, EventType } from "../types/event.ts";
 import { ChatOptions } from "../types/chat.ts";
-import { GeminiAPIKey } from "../config/ai.ts";
+import { GeminiAPIKey, MaxTurns } from "../config/ai.ts";
 import { SystemPrompt } from "../config/systemPrompt.ts";
 
 const Models = {
@@ -131,6 +131,7 @@ export class GeminiAgent {
   }
 
   async agentLoop(prompt: string): Promise<string> {
+    const span = trace.getActiveSpan();
     let message: PartListUnion = prompt;
 
     this.onEvent({
@@ -138,7 +139,15 @@ export class GeminiAgent {
       displayText: prompt,
     });
 
+    let turnCount = -1;
     while (true) {
+      turnCount++;
+
+      if (turnCount > MaxTurns) {
+        message = [message, "This is the last turn. You **must** return a text response now."];
+      }
+
+      span!.addEvent("turnStarted", { "event.attributes.turnCount": turnCount });
       const response = await this.sendMessage(message);
 
       if (response.functionCalls && response.functionCalls.length > 0) {
