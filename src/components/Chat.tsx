@@ -6,6 +6,7 @@ import { ChatService } from "../services/chatService.ts";
 import { EventType } from "../types/event.ts";
 import { MessageList } from "./MessageList.tsx";
 import { LoadingIndicator } from "./LoadingIndicator.tsx";
+import { ScrollView } from "./ScrollView.tsx";
 
 export const Chat = () => {
   const [input, setInput] = useState("");
@@ -65,6 +66,14 @@ export const Chat = () => {
     }
   };
 
+  // Calculate the available height for the scroll view
+  // Total rows - (paddingY * 2) - (input area height + margin)
+  // Input area height = 1 (content) + 2 (border) = 3
+  // Input margin top = 1
+  // Root paddingY = 1, so top=1, bottom=1.
+  // Total chrome = 1 (top) + 1 (bottom) + 3 (input) + 1 (margin) = 6
+  const viewHeight = dimensions.rows - 6;
+
   return (
     <Box
       flexDirection="column"
@@ -73,14 +82,14 @@ export const Chat = () => {
       paddingX={1}
       paddingY={1}
     >
-      <Box flexDirection="column" flexGrow={1} overflowY="hidden">
+      <ScrollView height={viewHeight}>
         <MessageList messages={messages} />
         {isLoading && (
           <Box marginTop={1}>
             <LoadingIndicator />
           </Box>
         )}
-      </Box>
+      </ScrollView>
 
       <Box
         borderStyle="single"

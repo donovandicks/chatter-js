@@ -19,6 +19,7 @@ export const MessageList: React.FC<MessageListProps> = React.memo(({ messages })
               borderStyle="single"
               borderColor="gray"
               flexDirection="column"
+              flexShrink={0}
             >
               <Box marginBottom={0}>
                 <Text color="gray" bold>Tool Execution</Text>
@@ -42,6 +43,7 @@ export const MessageList: React.FC<MessageListProps> = React.memo(({ messages })
             borderColor={color}
             marginBottom={1}
             paddingX={1}
+            flexShrink={0}
           >
             <Box marginBottom={1}>
               <Text color={color} bold underline>
