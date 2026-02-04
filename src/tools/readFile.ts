@@ -1,6 +1,7 @@
 import z from "zod";
 import { ToolSchema } from "../types/tool.ts";
 import { existsSync } from "@std/fs";
+import { checkPathWithinCurrentDir } from "./utils/checkCurrentDirectory.ts";
 
 const readFileParams = z.object({
   path: z.string().describe("The relative path of a file in the working directory."),
@@ -18,6 +19,10 @@ export const ReadFileTool = {
 export function readFile({ path }: ReadFileParams): string {
   if (!path) {
     return "Error: 'path' must be defined.";
+  }
+
+  if (!checkPathWithinCurrentDir(path)) {
+    return "Error: provided path is outside of the working directory.";
   }
 
   if (!existsSync(path)) {

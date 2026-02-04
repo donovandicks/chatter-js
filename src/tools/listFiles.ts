@@ -1,5 +1,6 @@
 import z from "zod";
 import { ToolSchema } from "../types/tool.ts";
+import { checkPathWithinCurrentDir } from "./utils/checkCurrentDirectory.ts";
 
 const listFilesParams = z.object({
   path: z.string().describe(
@@ -18,6 +19,10 @@ export const ListFilesTool = {
 
 export function listFiles({ path }: ListFilesParams): string {
   const dir = path || ".";
+
+  if (!checkPathWithinCurrentDir(dir)) {
+    return "Error: provided path is outside of the working directory.";
+  }
 
   const files = [];
   const dirs = [];

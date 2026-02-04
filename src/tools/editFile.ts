@@ -1,6 +1,7 @@
 import z from "zod";
 import { ToolSchema } from "../types/tool.ts";
 import { existsSync } from "@std/fs";
+import { checkPathWithinCurrentDir } from "./utils/checkCurrentDirectory.ts";
 
 const editFileParams = z.object({
   path: z.string().describe("The relative path of a file in the working directory."),
@@ -22,6 +23,10 @@ If the file does not exist, it will be created.
 export function editFile({ path, prev, edit }: EditFileParams): string {
   if (!path) {
     return "Error: 'path' must be defined.";
+  }
+
+  if (!checkPathWithinCurrentDir(path)) {
+    return "Error: provided path is outside of the working directory.";
   }
 
   if (prev === edit) {
