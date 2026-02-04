@@ -35,7 +35,7 @@ export const ScrollView: React.FC<ScrollViewProps> = ({ height, children }) => {
   });
 
   return (
-    <Box height={height} flexDirection="column" borderStyle="single" borderColor="gray">
+    <Box height={height} flexDirection="column">
       <ScrollViewImpl ref={scrollRef}>
         {children}
       </ScrollViewImpl>

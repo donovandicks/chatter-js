@@ -79,8 +79,8 @@ export const Chat = () => {
       flexDirection="column"
       width={dimensions.columns}
       height={dimensions.rows}
-      paddingX={1}
-      paddingY={1}
+      paddingX={0.5}
+      paddingY={0.5}
     >
       <ScrollView height={viewHeight}>
         <MessageList messages={messages} />
