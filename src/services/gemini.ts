@@ -14,6 +14,7 @@ import { tracer } from "../o11y/tracing.ts";
 import { SpanStatusCode } from "@opentelemetry/api";
 import { EventPayload, EventType } from "../types/event.ts";
 import { ChatOptions } from "../types/chat.ts";
+import { GeminiAPIKey } from "../config/ai.ts";
 
 const Models = {
   Gemini3Pro: "gemini-3-pro-preview",
@@ -44,16 +45,15 @@ export class GeminiAgent {
 
   constructor({ tools, onEvent }: ChatOptions) {
     this.onEvent = onEvent;
-    const apiKey = Deno.env.get("GEMINI_API_KEY");
-    if (!apiKey) {
-      throw new Error("GEMINI_API_KEY is not set in the environment variables.");
+    if (!GeminiAPIKey) {
+      throw new Error("GEMINI_API_KEY is not set in the environment.");
     }
 
     if (tools && tools.length) {
       this.tools.push(...tools.map((t) => toolSchemaToGeminiTool(t)));
     }
 
-    this.client = new GoogleGenAI({ apiKey });
+    this.client = new GoogleGenAI({ apiKey: GeminiAPIKey });
     this.chat = this.client.chats.create({
       model: Models.Gemini3Flash,
       history: this.history,
