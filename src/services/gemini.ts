@@ -14,7 +14,7 @@ import { tracer } from "../o11y/tracing.ts";
 import { SpanStatusCode, trace } from "@opentelemetry/api";
 import { EventPayload, EventType } from "../types/event.ts";
 import { ChatOptions } from "../types/chat.ts";
-import { GeminiAPIKey, MaxTurns } from "../config/ai.ts";
+import { GeminiAPIKey } from "../config/ai.ts";
 import { SystemPrompt } from "../config/systemPrompt.ts";
 
 const Models = {
@@ -38,14 +38,14 @@ export class GeminiAgent {
   private history: Content[] = [];
   private client: GoogleGenAI;
   private chat: Chat;
-  private tools: ToolListUnion = [
-    // { googleSearch: {} },
-    // { urlContext: {} },
-  ];
+  private tools: ToolListUnion = []; // [ { googleSearch: {} }, { urlContext: {} }, ];
+  private maxTurns: number;
   private onEvent: (event: EventPayload) => void;
 
-  constructor({ tools, onEvent }: ChatOptions) {
+  constructor({ maxTurns, tools, onEvent }: ChatOptions) {
+    this.maxTurns = maxTurns;
     this.onEvent = onEvent;
+
     if (!GeminiAPIKey) {
       throw new Error("GEMINI_API_KEY is not set in the environment.");
     }
@@ -142,7 +142,7 @@ export class GeminiAgent {
     let turnCount = -1;
     while (true) {
       turnCount++;
-      const isLastTurn = turnCount >= MaxTurns;
+      const isLastTurn = turnCount >= this.maxTurns;
 
       if (isLastTurn) {
         message = [message, "This is the last turn. You **must** return a text response now."];

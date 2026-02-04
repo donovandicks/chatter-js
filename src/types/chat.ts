@@ -13,6 +13,7 @@ export interface Message {
 }
 
 export type ChatOptions = {
+  maxTurns: number;
   tools?: ToolSchema[];
   onEvent: (event: EventPayload) => void;
 };

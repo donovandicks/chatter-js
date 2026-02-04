@@ -7,8 +7,9 @@ import { EventType } from "../types/event.ts";
 import { MessageList } from "./MessageList.tsx";
 import { LoadingIndicator } from "./LoadingIndicator.tsx";
 import { ScrollView } from "./ScrollView.tsx";
+import { ChatterSettings } from "../types/config.ts";
 
-export const Chat = () => {
+export const Chat = ({ settings }: { settings: ChatterSettings }) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +21,7 @@ export const Chat = () => {
 
   const chatService = useMemo(() => {
     return new ChatService({
+      maxTurns: settings.maxTurns,
       onEvent: (event) => {
         if (event.type === EventType.ToolCall || event.type === EventType.ToolResponse) {
           setMessages((prev) => [
