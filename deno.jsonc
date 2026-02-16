@@ -31,14 +31,14 @@
     },
     "build": {
       "description": "Compile the application.",
-      "command": "deno compile -A -o ./chatter-js src/main.tsx",
+      "command": "OTEL_DENO=true deno compile -A -o ./chatter-js src/main.tsx",
       "dependencies": [
         "prebuild"
       ]
     },
     "build::quick": {
       "description": "Compile the application without prechecks.",
-      "command": "deno compile -A -o ./chatter-js src/main.tsx"
+      "command": "OTEL_DENO=true deno compile -A -o ./chatter-js src/main.tsx"
     },
     "clean": {
       "description": "Remove all compiled binaries and generated files.",
