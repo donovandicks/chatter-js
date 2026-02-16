@@ -54,7 +54,7 @@
     }
   },
   "imports": {
-    "@google/genai": "npm:@google/genai@^1.39.0",
+    "@google/genai": "npm:@google/genai@^1.41.0",
     "@opentelemetry/api": "npm:@opentelemetry/api@^1.9.0",
     "@std/assert": "jsr:@std/assert@^1.0.18",
     "@std/async": "jsr:@std/async@^1.1.1",
@@ -66,12 +66,12 @@
     "@std/path": "jsr:@std/path@^1.1.4",
     "@std/testing": "jsr:@std/testing@^1.0.17",
     "@std/yaml": "jsr:@std/yaml@^1.0.11",
-    "ink": "npm:ink@^6.6.0",
-    "ink-scroll-view": "npm:ink-scroll-view@^0.3.5",
+    "ink": "npm:ink@^6.7.0",
+    "ink-scroll-view": "npm:ink-scroll-view@^0.3.6",
     "ink-spinner": "npm:ink-spinner@^5.0.0",
     "ink-text-input": "npm:ink-text-input@^6.0.0",
     "react": "npm:react@^19.2.4",
-    "@types/react": "npm:@types/react@^19.2.10",
+    "@types/react": "npm:@types/react@^19.2.14",
     "zod": "npm:zod@^4.3.6"
   },
   "fmt": {
