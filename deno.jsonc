@@ -31,29 +31,30 @@
     },
     "build": {
       "description": "Compile the application.",
-      "command": "OTEL_DENO=true deno compile -A -o ./chatter-js src/main.tsx",
+      "command": "./scripts/compile.ts",
       "dependencies": [
         "prebuild"
       ]
     },
     "build::quick": {
       "description": "Compile the application without prechecks.",
-      "command": "OTEL_DENO=true deno compile -A -o ./chatter-js src/main.tsx"
+      "command": "./scripts/compile.ts"
     },
     "clean": {
       "description": "Remove all compiled binaries and generated files.",
       "command": "rm ./chatter-js"
     },
-    "lgtm:start": {
+    "lgtm::start": {
       "description": "Start the observability container.",
       "command": "docker compose up -d"
     },
-    "lgtm:stop": {
+    "lgtm::stop": {
       "description": "Stop the observability container.",
       "command": "docker compose down --remove-orphans"
     }
   },
   "imports": {
+    "@david/dax": "jsr:@david/dax@^0.45.0",
     "@google/genai": "npm:@google/genai@^1.41.0",
     "@opentelemetry/api": "npm:@opentelemetry/api@^1.9.0",
     "@std/assert": "jsr:@std/assert@^1.0.18",
